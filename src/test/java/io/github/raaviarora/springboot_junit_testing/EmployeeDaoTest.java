@@ -1,5 +1,7 @@
 package io.github.raaviarora.springboot_junit_testing;
 
+import io.github.raaviarora.springboot_junit_testing.model.Employee;
+import io.github.raaviarora.springboot_junit_testing.dao.EmployeeDao;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
@@ -13,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EmployeeRepositoryTest {
+public class EmployeeDaoTest {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeDao employeeDao;
 
     @Test
     @Order(1)
@@ -28,7 +30,7 @@ public class EmployeeRepositoryTest {
                 .email("raavi@gmail.com")
                 .build();
 
-        employeeRepository.save(emp);
+        employeeDao.save(emp);
 
         assertThat(emp.getId()).isGreaterThan(0);
     }
@@ -36,7 +38,7 @@ public class EmployeeRepositoryTest {
     @Test
     @Order(2)
     public void getEmployeeTest(){
-        Employee emp = employeeRepository.findById(1L).get();
+        Employee emp = employeeDao.findById(1L).get();
 
         assertThat(emp.getId()).isEqualTo(1L);
     }
@@ -44,7 +46,7 @@ public class EmployeeRepositoryTest {
     @Test
     @Order(3)
     public void getAllEmployeesTest(){
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeDao.findAll();
 
         assertThat(employees.size()).isGreaterThan(0);
     }
@@ -53,9 +55,9 @@ public class EmployeeRepositoryTest {
     @Order(4)
     @Rollback(false)
     public void updateEmployeeTest(){
-        Employee emp = employeeRepository.findById(1L).get();
+        Employee emp = employeeDao.findById(1L).get();
         emp.setEmail("ram@gmail.com");
-        Employee updatedEmployee = employeeRepository.save(emp);
+        Employee updatedEmployee = employeeDao.save(emp);
 
         assertThat(updatedEmployee.getEmail()).isEqualTo("ram@gmail.com");
     }
@@ -64,11 +66,11 @@ public class EmployeeRepositoryTest {
     @Order(5)
     @Rollback(false)
     public void deleteEmployeeTest(){
-        Employee emp = employeeRepository.findById(1L).get();
-        employeeRepository.delete(emp);
+        Employee emp = employeeDao.findById(1L).get();
+        employeeDao.delete(emp);
 
         Employee emp1 = null;
-        Optional<Employee> optionalEmployee = employeeRepository.findByEmail("ram@gmail.com");
+        Optional<Employee> optionalEmployee = employeeDao.findByEmail("ram@gmail.com");
 
         if(optionalEmployee.isPresent()){
             emp1 = optionalEmployee.get();

@@ -1,4 +1,4 @@
-package io.github.raaviarora.springboot_junit_testing;
+package io.github.raaviarora.springboot_junit_testing.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
