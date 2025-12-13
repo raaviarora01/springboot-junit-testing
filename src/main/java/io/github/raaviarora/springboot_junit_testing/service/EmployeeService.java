@@ -15,4 +15,6 @@ public interface EmployeeService {
     ResponseEntity<String> saveEmployee(Employee emp);
 
     ResponseEntity<String> updateEmployee(Long id, Employee emp);
+
+    ResponseEntity<String> deleteEmployee(Long id);
 }
