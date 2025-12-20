@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface EmployeeDao extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByEmail(String email);
+
+    void deleteByEmail(String email);
 }
