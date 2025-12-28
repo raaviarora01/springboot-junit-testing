@@ -1,11 +1,9 @@
-package io.github.raaviarora.springboot_junit_testing.controller;
+package io.github.raaviarora.springboot_junit_testing.dao;
 
 import io.github.raaviarora.springboot_junit_testing.model.Employee;
-import io.github.raaviarora.springboot_junit_testing.dao.EmployeeDao;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +19,6 @@ public class EmployeeDaoTest {
     private EmployeeDao employeeDao;
 
     @Test
-//    @Order(1)
-//    @Rollback(false)
     @DisplayName("Save employee into database")
     public void EmployeeDao_SaveEmployee_PersistsEmployee(){
         Employee emp = Employee.builder()
@@ -38,7 +34,6 @@ public class EmployeeDaoTest {
     }
 
     @Test
-//    @Order(2)
     @DisplayName("Find employee by Id")
     public void EmployeeDao_FindById_ReturnEmployee(){
         Employee emp = Employee.builder()
@@ -63,8 +58,6 @@ public class EmployeeDaoTest {
                 .lastName("Arora")
                 .email("raavi@gmail.com")
                 .build();
-
-        Employee savedEmp = employeeDao.save(emp);
 
         Optional<Employee> foundEmp = employeeDao.findByEmail(emp.getEmail());
 
@@ -97,8 +90,6 @@ public class EmployeeDaoTest {
     }
 
     @Test
-//    @Order(4)
-//    @Rollback(false)
     @DisplayName("Update employee details in database")
     public void EmployeeDao_UpdateEmployee_ReturnsNotNullEmployee(){
         Employee emp = Employee.builder()
@@ -119,8 +110,6 @@ public class EmployeeDaoTest {
     }
 
     @Test
-//    @Order(5)
-//    @Rollback(false)
     @DisplayName("Delete Employee by Id")
     public void EmployeeDao_DeleteById_ReturnsEmployeeIsNull(){
         Employee emp = Employee.builder()
