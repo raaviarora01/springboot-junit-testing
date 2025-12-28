@@ -3,7 +3,7 @@ package io.github.raaviarora.springboot_junit_testing.dao;
 import io.github.raaviarora.springboot_junit_testing.model.Employee;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,9 +59,10 @@ public class EmployeeDaoTest {
                 .email("raavi@gmail.com")
                 .build();
 
+        employeeDao.save(emp);
         Optional<Employee> foundEmp = employeeDao.findByEmail(emp.getEmail());
 
-        assertThat(foundEmp).isNotNull();
+        assertThat(foundEmp).isPresent();
         assertThat(foundEmp.get().getFirstName()).isEqualTo("Raavi");
     }
 

@@ -2,6 +2,7 @@ package io.github.raaviarora.springboot_junit_testing.controller;
 
 import io.github.raaviarora.springboot_junit_testing.model.Employee;
 import io.github.raaviarora.springboot_junit_testing.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> saveEmployee(@RequestBody Employee emp){
+    public ResponseEntity<String> saveEmployee(@Valid @RequestBody Employee emp){
         return employeeService.saveEmployee(emp);
     }
 
     @PutMapping("/updateEmployee/{id}")
-    public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee emp){
+    public ResponseEntity<String> updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee emp){
         return employeeService.updateEmployee(id, emp);
     }
 
